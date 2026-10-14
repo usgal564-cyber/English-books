@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>English Books</title>
+<style>
+  :root{
+    --bg:#f4efe6; --paper:#fffdf8; --ink:#2b2622; --muted:#7a6f64;
+    --accent:#c2562b; --accent-soft:#f3d9cb; --line:#e4dccd;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1d1a17; --paper:#262220; --ink:#efe8dd; --muted:#a99d90;
+           --accent:#e8845a; --accent-soft:#4a3226; --line:#3a332d; }
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:Georgia,"Times New Roman",serif;
+    display:flex; justify-content:center; padding:20px 14px 40px;
+  }
+  .book{width:100%; max-width:640px}
+  header{text-align:center; margin-bottom:14px}
+  header h1{margin:0; font-size:1.5rem}
+  header p{margin:6px 0 0; color:var(--muted); font-family:system-ui,sans-serif; font-size:.9rem}
+  .tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin:0 0 14px; font-family:system-ui,sans-serif}
+  .tab{
+    background:var(--paper); color:var(--ink); border:1px solid var(--line);
+    border-radius:999px; padding:7px 14px; font-size:.9rem; cursor:pointer;
+  }
+  .tab.on{background:var(--accent); color:#fff; border-color:var(--accent)}
+  .page{
+    background:var(--paper); border:1px solid var(--line); border-radius:14px;
+    padding:28px 26px; min-height:300px; box-shadow:0 6px 24px rgba(0,0,0,.08);
+  }
+  .page h2{margin:0 0 14px; font-size:1rem; color:var(--accent); font-family:system-ui,sans-serif;
+    letter-spacing:.08em; text-transform:uppercase}
+  .page p{font-size:1.3rem; line-height:2; margin:0}
+  .w{
+    cursor:pointer; border-radius:5px; padding:1px 1px;
+    -webkit-user-select:none; user-select:none;
+    -webkit-touch-callout:none; -webkit-tap-highlight-color:transparent;
+  }
+  .w:hover{background:var(--accent-soft)}
+  .w.active{background:var(--accent); color:#fff}
+  .nav{display:flex; align-items:center; justify-content:space-between; margin-top:16px; font-family:system-ui,sans-serif}
+  .nav button{
+    background:var(--accent); color:#fff; border:0; border-radius:10px;
+    padding:10px 18px; font-size:1rem; cursor:pointer;
+  }
+  .nav button:disabled{opacity:.35; cursor:default}
+  .dots{display:flex; gap:8px}
+  .dot{width:10px; height:10px; border-radius:50%; background:var(--line)}
+  .dot.on{background:var(--accent)}
+  .learned{
+    margin-top:18px; background:var(--paper); border:1px solid var(--line); border-radius:12px;
+    padding:12px 16px; font-family:system-ui,sans-serif; font-size:.92rem;
+  }
+  .learned b{color:var(--accent)}
+  #list{margin-top:8px; display:flex; flex-wrap:wrap; gap:6px}
+  .chip{background:var(--accent-soft); border-radius:999px; padding:3px 10px}
+  #tip{
+    position:fixed; z-index:10; pointer-events:none; opacity:0; transform:translateY(4px);
+    transition:opacity .12s, transform .12s;
+    background:#2b2622; color:#fff; padding:8px 14px; border-radius:10px;
+    font-family:system-ui,sans-serif; font-size:1.05rem; white-space:nowrap;
+    box-shadow:0 6px 18px rgba(0,0,0,.3);
+  }
+  #tip.show{opacity:1; transform:none}
+  #tip small{display:block; opacity:.6; font-size:.72rem}
+</style>
+</head>
+<body>
+<div class="book">
+  <header>
+    <h1>📖 English Books</h1>
+    <p>Англи үг дээр удаан дарж барьвал монгол орчуулга гарна 👆</p>
+  </header>
+
+  <div class="tabs" id="tabs"></div>
+  <div class="page" id="page"></div>
+
+  <div class="nav">
+    <button id="prev">← Өмнөх</button>
+    <div class="dots" id="dots"></div>
+    <button id="next">Дараах →</button>
+  </div>
+
+  <div class="learned">
+    Үзсэн үг: <b id="count">0</b>
+    <div id="list"></div>
+  </div>
+</div>
+
+<div id="tip"></div>
+
+<script>
+/* ---------- Номууд (4 ном, тус бүр 3 хуудас) ---------- */
+const BOOKS = [
+  { name: "Tuya and the Little Dog", mn: "Туяа ба бяцхан нохой", pages: [
+    "Tuya lives in a small house near the mountain. She is nine years old. Every morning she wakes up early and looks at the sun. One day she hears a sound outside. It is a little dog. The dog is cold and hungry.",
+    "Tuya gives the dog some milk and bread. The dog drinks the milk and eats the bread. Then it looks at Tuya and smiles. Tuya asks her mother, \"Can I keep the dog?\" Her mother says, \"Yes, but you must take care of it.\"",
+    "Now Tuya and the dog are best friends. They walk to the river every day. They play with a ball and run in the green grass. At night the dog sleeps next to Tuya's bed. Tuya is very happy. She loves her dog."
+  ]},
+  { name: "The Brown Horse", mn: "Хүрэн морь", pages: [
+    "Bat is a boy from the steppe. He has a brown horse called Tenger. Every day Bat rides his horse across the wide field. The wind is soft and the sky is blue.",
+    "One evening a storm comes. The rain is heavy and the wind is strong. Bat is lost in the dark. He is afraid, but his horse knows the way.",
+    "The horse walks slowly through the rain. After one hour Bat sees a light. It is his home! His father opens the door. Bat hugs his horse and says, \"Thank you, my friend.\""
+  ]},
+  { name: "A Day at the Market", mn: "Зах дээрх нэг өдөр", pages: [
+    "Saran goes to the market with her grandmother. The market is big and busy. There are many people and many colors. Saran sees red apples, yellow bananas and fresh fish.",
+    "Her grandmother buys vegetables and cheese. Saran carries the bag. A kind man gives her a sweet orange. She says, \"Thank you very much!\"",
+    "At noon they sit under a tree. They eat lunch and drink tea. Saran is tired but happy. She holds her grandmother's hand and walks home."
+  ]},
+  { name: "The Four Seasons", mn: "Дөрвөн улирал", pages: [
+    "In spring the snow melts and flowers grow. The birds sing in the trees. The days are warm and the children play outside. In summer the sun is hot and the days are long.",
+    "In autumn the leaves turn yellow and fall to the ground. The air is cool and the nights are longer. People cook warm soup and wear thick coats.",
+    "In winter it is very cold. White snow covers the land. Families stay at home and tell old stories. Every season is different, and every season is beautiful."
+  ]}
+];
+
+/* ---------- Толь бичиг (англи → монгол) ---------- */
+const DICT = {
+  "tuya":"Туяа (нэр)", "and":"ба", "the":"тэр / энэ", "little":"жижигхэн", "dog":"нохой",
+  "lives":"амьдардаг", "in":"-д, дотор", "a":"нэг", "small":"жижиг", "house":"байшин",
+  "near":"ойр", "mountain":"уул", "she":"тэр (эмэгтэй)", "is":"байна", "nine":"ес",
+  "years":"жил", "old":"настай", "every":"бүр", "morning":"өглөө", "wakes":"сэрдэг",
+  "up":"дээш", "early":"эрт", "looks":"хардаг", "at":"-руу, -д", "sun":"нар",
+  "one":"нэг", "day":"өдөр", "hears":"сонсдог", "sound":"дуу чимээ", "outside":"гадаа",
+  "it":"энэ / тэр", "cold":"хүйтэн", "hungry":"өлссөн", "gives":"өгдөг", "some":"жаахан",
+  "milk":"сүү", "bread":"талх", "drinks":"уудаг", "eats":"иддэг", "then":"дараа нь",
+  "smiles":"инээмсэглэдэг", "asks":"асуудаг", "her":"түүний (эм)", "mother":"ээж", "can":"чадах, болох",
+  "i":"би", "keep":"тэжээх, хадгалах", "says":"хэлдэг", "yes":"тийм", "but":"гэхдээ",
+  "you":"чи", "must":"ёстой", "take":"авах", "care":"халамж", "of":"-ийн",
+  "now":"одоо", "are":"байна", "best":"хамгийн сайн", "friends":"найзууд", "they":"тэд",
+  "walk":"алхах", "to":"руу", "river":"гол", "play":"тоглох", "with":"-тай",
+  "ball":"бөмбөг", "run":"гүйх", "green":"ногоон", "grass":"өвс", "night":"шөнө",
+  "sleeps":"унтдаг", "next":"хажууд", "bed":"ор", "very":"маш", "happy":"баяртай",
+  "loves":"хайрладаг",
+
+  /* Ном 2 */
+  "bat":"Бат (нэр)", "boy":"хүү", "from":"-аас", "steppe":"тал нутаг", "has":"байна (эзэмшдэг)",
+  "brown":"хүрэн", "horse":"морь", "called":"нэртэй", "tenger":"Тэнгэр (нэр)", "rides":"унадаг",
+  "across":"дундуур, дайрч", "wide":"өргөн", "field":"тал", "wind":"салхи", "soft":"зөөлөн",
+  "sky":"тэнгэр", "blue":"цэнхэр", "evening":"орой", "storm":"шуурга", "comes":"ирдэг",
+  "rain":"бороо", "heavy":"хүчтэй, хүнд", "strong":"хүчтэй", "lost":"төөрсөн", "dark":"харанхуй",
+  "he":"тэр (эр)", "his":"түүний (эр)", "afraid":"айсан", "knows":"мэддэг", "way":"зам",
+  "walks":"алхдаг", "slowly":"аажим, удаан", "through":"дундуур", "after":"дараа", "hour":"цаг",
+  "sees":"хардаг", "light":"гэрэл", "home":"гэр, гэртээ", "father":"аав", "opens":"нээдэг",
+  "door":"хаалга", "hugs":"тэврэдэг", "thank":"талархах", "my":"миний", "friend":"найз",
+
+  /* Ном 3 */
+  "saran":"Саран (нэр)", "goes":"явдаг", "market":"зах", "grandmother":"эмээ", "big":"том",
+  "busy":"хөл хөдөлгөөнтэй", "there":"тэнд", "many":"олон", "people":"хүмүүс", "colors":"өнгө",
+  "red":"улаан", "apples":"алим", "yellow":"шар", "bananas":"гадил", "fresh":"шинэхэн",
+  "fish":"загас", "buys":"худалдаж авдаг", "vegetables":"ногоо", "cheese":"бяслаг",
+  "carries":"үүрдэг, барьдаг", "bag":"цүнх", "kind":"сайхан сэтгэлтэй", "man":"эрэгтэй хүн",
+  "sweet":"чихэрлэг", "orange":"жүрж", "noon":"үд", "sit":"сууна", "under":"доор",
+  "tree":"мод", "lunch":"үдийн хоол", "tea":"цай", "tired":"ядарсан", "holds":"барьдаг",
+  "hand":"гар", "much":"их", "eat":"идэх", "drink":"уух",
+
+  /* Ном 4 */
+  "spring":"хавар", "snow":"цас", "melts":"хайлдаг", "flowers":"цэцэг", "grow":"ургана",
+  "birds":"шувууд", "sing":"дуулна", "trees":"моддууд", "days":"өдрүүд", "warm":"дулаан",
+  "children":"хүүхдүүд", "summer":"зун", "hot":"халуун", "long":"урт", "autumn":"намар",
+  "leaves":"навчис", "turn":"болно, эргэнэ", "fall":"унана", "ground":"газар", "air":"агаар",
+  "cool":"сэрүүн", "nights":"шөнүүд", "longer":"илүү урт", "cook":"хоол хийнэ", "soup":"шөл",
+  "wear":"өмсөнө", "thick":"зузаан", "coats":"пальто, дээл", "winter":"өвөл", "white":"цагаан",
+  "covers":"бүрхдэг", "land":"нутаг", "families":"айл, гэр бүл", "stay":"үлдэнэ",
+  "tell":"ярина", "stories":"түүхүүд", "season":"улирал", "different":"өөр, ялгаатай",
+  "beautiful":"үзэсгэлэнтэй"
+};
+
+const HOLD_MS = 350;
+const tip = document.getElementById("tip");
+const pageEl = document.getElementById("page");
+const seen = new Set();
+let book = 0, current = 0, timer = null, hideTimer = null, activeEl = null;
+
+function norm(w){ return w.toLowerCase().replace(/['’]s$/, ""); }
+
+function render(){
+  const pages = BOOKS[book].pages;
+  const h = document.createElement("h2");
+  h.textContent = BOOKS[book].name + " · " + (current+1) + "/" + pages.length;
+  const para = document.createElement("p");
+  pages[current].split(/([A-Za-z]+(?:['’][a-z]+)?)/).forEach(part=>{
+    if(/^[A-Za-z]/.test(part)){
+      const s = document.createElement("span");
+      s.className = "w"; s.textContent = part; s.dataset.k = norm(part);
+      para.appendChild(s);
+    } else para.appendChild(document.createTextNode(part));
+  });
+  pageEl.replaceChildren(h, para);
+  document.getElementById("prev").disabled = current===0;
+  document.getElementById("next").disabled = current===pages.length-1;
+  document.querySelectorAll(".dot").forEach((d,i)=>d.classList.toggle("on", i===current));
+  document.querySelectorAll(".tab").forEach((t,i)=>t.classList.toggle("on", i===book));
+  hideTip();
+}
+
+function showTip(el){
+  const k = el.dataset.k;
+  const mn = DICT[k] || "(орчуулга олдсонгүй)";
+  tip.innerHTML = mn + "<small>" + el.textContent + "</small>";
+  const r = el.getBoundingClientRect();
+  tip.classList.add("show");
+  const tw = tip.offsetWidth;
+  let left = Math.min(Math.max(8, r.left + r.width/2 - tw/2), window.innerWidth - tw - 8);
+  let top = r.top - tip.offsetHeight - 10;
+  if(top < 8) top = r.bottom + 10;
+  tip.style.left = left + "px"; tip.style.top = top + "px";
+  el.classList.add("active"); activeEl = el;
+  if(DICT[k] && !seen.has(k)){
+    seen.add(k);
+    document.getElementById("count").textContent = seen.size;
+    const c = document.createElement("span"); c.className = "chip";
+    c.textContent = el.textContent.toLowerCase() + " = " + DICT[k];
+    document.getElementById("list").appendChild(c);
+  }
+}
+function hideTip(){
+  tip.classList.remove("show");
+  if(activeEl){ activeEl.classList.remove("active"); activeEl = null; }
+}
+function cancel(){ clearTimeout(timer); timer = null; }
+
+pageEl.addEventListener("pointerdown", e=>{
+  const el = e.target.closest(".w"); if(!el) return;
+  clearTimeout(hideTimer); hideTip(); cancel();
+  timer = setTimeout(()=>{ showTip(el); timer = null; }, HOLD_MS);
+});
+["pointerup","pointerleave","pointercancel"].forEach(ev=>{
+  pageEl.addEventListener(ev, ()=>{
+    cancel();
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(hideTip, 1200);
+  });
+});
+pageEl.addEventListener("contextmenu", e=>e.preventDefault());
+
+const dots = document.getElementById("dots");
+for(let i=0;i<3;i++){ const d=document.createElement("div"); d.className="dot"; dots.appendChild(d); }
+
+const tabs = document.getElementById("tabs");
+BOOKS.forEach((b,i)=>{
+  const t = document.createElement("button");
+  t.className = "tab"; t.textContent = b.mn;
+  t.onclick = ()=>{ book = i; current = 0; render(); };
+  tabs.appendChild(t);
+});
+
+document.getElementById("prev").onclick = ()=>{ if(current>0){ current--; render(); } };
+document.getElementById("next").onclick = ()=>{ if(current<BOOKS[book].pages.length-1){ current++; render(); } };
+render();
+</script>
+</body>
+</html>
