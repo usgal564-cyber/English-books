@@ -20,23 +20,23 @@
     font-family:Georgia,"Times New Roman",serif;
     display:flex; justify-content:center; padding:20px 14px 40px;
   }
-  .book{width:100%; max-width:640px}
+  .book{width:100%; max-width:680px}
   header{text-align:center; margin-bottom:14px}
   header h1{margin:0; font-size:1.5rem}
   header p{margin:6px 0 0; color:var(--muted); font-family:system-ui,sans-serif; font-size:.9rem}
   .tabs{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin:0 0 14px; font-family:system-ui,sans-serif}
   .tab{
     background:var(--paper); color:var(--ink); border:1px solid var(--line);
-    border-radius:999px; padding:7px 14px; font-size:.9rem; cursor:pointer;
+    border-radius:999px; padding:7px 14px; font-size:.88rem; cursor:pointer;
   }
   .tab.on{background:var(--accent); color:#fff; border-color:var(--accent)}
   .page{
     background:var(--paper); border:1px solid var(--line); border-radius:14px;
-    padding:28px 26px; min-height:300px; box-shadow:0 6px 24px rgba(0,0,0,.08);
+    padding:28px 26px; min-height:320px; box-shadow:0 6px 24px rgba(0,0,0,.08);
   }
-  .page h2{margin:0 0 14px; font-size:1rem; color:var(--accent); font-family:system-ui,sans-serif;
-    letter-spacing:.08em; text-transform:uppercase}
-  .page p{font-size:1.3rem; line-height:2; margin:0}
+  .page h2{margin:0 0 14px; font-size:.95rem; color:var(--accent); font-family:system-ui,sans-serif;
+    letter-spacing:.06em; text-transform:uppercase}
+  .page p{font-size:1.25rem; line-height:2; margin:0}
   .w{
     cursor:pointer; border-radius:5px; padding:1px 1px;
     -webkit-user-select:none; user-select:none;
@@ -96,89 +96,80 @@
 <div id="tip"></div>
 
 <script>
-/* ---------- Номууд (4 ном, тус бүр 3 хуудас) ---------- */
+/* ---------- Номууд ---------- */
 const BOOKS = [
-  { name: "Tuya and the Little Dog", mn: "Туяа ба бяцхан нохой", pages: [
-    "Tuya lives in a small house near the mountain. She is nine years old. Every morning she wakes up early and looks at the sun. One day she hears a sound outside. It is a little dog. The dog is cold and hungry.",
-    "Tuya gives the dog some milk and bread. The dog drinks the milk and eats the bread. Then it looks at Tuya and smiles. Tuya asks her mother, \"Can I keep the dog?\" Her mother says, \"Yes, but you must take care of it.\"",
-    "Now Tuya and the dog are best friends. They walk to the river every day. They play with a ball and run in the green grass. At night the dog sleeps next to Tuya's bed. Tuya is very happy. She loves her dog."
-  ]},
-  { name: "The Brown Horse", mn: "Хүрэн морь", pages: [
-    "Bat is a boy from the steppe. He has a brown horse called Tenger. Every day Bat rides his horse across the wide field. The wind is soft and the sky is blue.",
-    "One evening a storm comes. The rain is heavy and the wind is strong. Bat is lost in the dark. He is afraid, but his horse knows the way.",
-    "The horse walks slowly through the rain. After one hour Bat sees a light. It is his home! His father opens the door. Bat hugs his horse and says, \"Thank you, my friend.\""
-  ]},
-  { name: "A Day at the Market", mn: "Зах дээрх нэг өдөр", pages: [
-    "Saran goes to the market with her grandmother. The market is big and busy. There are many people and many colors. Saran sees red apples, yellow bananas and fresh fish.",
-    "Her grandmother buys vegetables and cheese. Saran carries the bag. A kind man gives her a sweet orange. She says, \"Thank you very much!\"",
-    "At noon they sit under a tree. They eat lunch and drink tea. Saran is tired but happy. She holds her grandmother's hand and walks home."
-  ]},
-  { name: "The Four Seasons", mn: "Дөрвөн улирал", pages: [
-    "In spring the snow melts and flowers grow. The birds sing in the trees. The days are warm and the children play outside. In summer the sun is hot and the days are long.",
-    "In autumn the leaves turn yellow and fall to the ground. The air is cool and the nights are longer. People cook warm soup and wear thick coats.",
-    "In winter it is very cold. White snow covers the land. Families stay at home and tell old stories. Every season is different, and every season is beautiful."
-  ]}
+ {
+  "name": "The Lost Wallet",
+  "mn": "Алдсан хэтэвч",
+  "pages": [
+   "Anu was walking home from school when she noticed a brown wallet on the sidewalk. She picked it up and looked inside. There was some money, a bus card, and a photo of an old man.",
+   "Anu felt nervous. She could keep the money, but she knew that was wrong. The wallet belonged to someone who probably needed it. She decided to find the owner.",
+   "She looked at the bus card and saw a name: Mr. Dorj. Then she asked the shopkeeper nearby if he knew him. The shopkeeper smiled and pointed to a small house across the street.",
+   "Anu knocked on the door. An old man opened it slowly. When he saw his wallet, his eyes filled with tears. \"Thank you,\" he said. \"Honesty is rare these days.\" Anu walked home feeling proud."
+  ]
+ },
+ {
+  "name": "Winter in Ulaanbaatar",
+  "mn": "Улаанбаатарын өвөл",
+  "pages": [
+   "Winter in Ulaanbaatar is long and extremely cold. Temperatures often fall below minus thirty degrees. People wear heavy coats, warm hats and thick boots whenever they go outside.",
+   "Many families live in traditional gers on the edge of the city. They burn coal to stay warm, but the smoke makes the air dirty. In the morning, a gray cloud covers the streets.",
+   "Despite the cold, winter also has its joys. Children skate on frozen rivers, and families gather to celebrate Tsagaan Sar, the Lunar New Year. They eat dumplings, drink milk tea and visit their relatives.",
+   "When spring finally arrives, everyone feels relieved. The snow melts, the grass turns green, and the city comes alive again. Still, people remember winter with a strange kind of pride."
+  ]
+ },
+ {
+  "name": "The Young Inventor",
+  "mn": "Залуу зохион бүтээгч",
+  "pages": [
+   "Temuulen was fourteen years old and loved building things. His room was full of wires, batteries and broken radios. His parents often complained about the mess, but they were secretly proud.",
+   "One summer, a drought hit his grandfather's village. The well was nearly empty and the animals were thirsty. Temuulen wanted to help, so he began to think about a solution.",
+   "He read books and watched videos for weeks. Finally he designed a small machine that collected water from the morning fog. It was simple, cheap and made from old plastic bottles.",
+   "The first test failed. The machine leaked and produced only a few drops. Temuulen felt disappointed, but he refused to give up. He fixed the leaks and tried again the next day.",
+   "This time it worked. By evening the tank was half full. The villagers were amazed, and his grandfather hugged him tightly. \"You are not just a boy,\" he said. \"You are an inventor.\""
+  ]
+ },
+ {
+  "name": "A Journey by Train",
+  "mn": "Галт тэргээр аялсан нь",
+  "pages": [
+   "Last summer, Bolor traveled by train from Ulaanbaatar to Darkhan. She had never taken a long train trip before, so she was both excited and a little nervous. She packed a bag with snacks, a book and a warm jacket.",
+   "The train left the station exactly on time. Through the window, Bolor watched endless green hills and herds of horses. Sometimes she saw a lonely ger standing beside a small river.",
+   "A friendly woman sat next to her. She shared her cookies and told stories about her childhood in the countryside. Bolor listened carefully and forgot about the time.",
+   "Three hours later, the train arrived. Bolor said goodbye to the woman and stepped onto the platform. She realized that the journey itself had been the best part of the trip."
+  ]
+ },
+ {
+  "name": "Small Habits, Big Changes",
+  "mn": "Жижиг зуршил, том өөрчлөлт",
+  "pages": [
+   "Many people believe that success comes from big, dramatic actions. In reality, it usually comes from small habits repeated every day. A tiny action may seem unimportant, but over time it can change your life.",
+   "Imagine reading just ten pages of a book each day. In one year, you would finish about twelve books. Now imagine walking for twenty minutes every morning. After a few months, you would feel stronger and healthier.",
+   "The secret is to start small. If you try to change everything at once, you will probably get tired and quit. Instead, choose one easy habit and do it at the same time each day.",
+   "It also helps to be patient. Progress is often invisible at first, like a plant growing under the soil. Then, suddenly, you notice the results, and your effort feels worthwhile.",
+   "So do not wait for the perfect moment. Begin today, even if the step is tiny. Tomorrow, you will be one day closer to the person you want to become."
+  ]
+ }
 ];
 
 /* ---------- Толь бичиг (англи → монгол) ---------- */
-const DICT = {
-  "tuya":"Туяа (нэр)", "and":"ба", "the":"тэр / энэ", "little":"жижигхэн", "dog":"нохой",
-  "lives":"амьдардаг", "in":"-д, дотор", "a":"нэг", "small":"жижиг", "house":"байшин",
-  "near":"ойр", "mountain":"уул", "she":"тэр (эмэгтэй)", "is":"байна", "nine":"ес",
-  "years":"жил", "old":"настай", "every":"бүр", "morning":"өглөө", "wakes":"сэрдэг",
-  "up":"дээш", "early":"эрт", "looks":"хардаг", "at":"-руу, -д", "sun":"нар",
-  "one":"нэг", "day":"өдөр", "hears":"сонсдог", "sound":"дуу чимээ", "outside":"гадаа",
-  "it":"энэ / тэр", "cold":"хүйтэн", "hungry":"өлссөн", "gives":"өгдөг", "some":"жаахан",
-  "milk":"сүү", "bread":"талх", "drinks":"уудаг", "eats":"иддэг", "then":"дараа нь",
-  "smiles":"инээмсэглэдэг", "asks":"асуудаг", "her":"түүний (эм)", "mother":"ээж", "can":"чадах, болох",
-  "i":"би", "keep":"тэжээх, хадгалах", "says":"хэлдэг", "yes":"тийм", "but":"гэхдээ",
-  "you":"чи", "must":"ёстой", "take":"авах", "care":"халамж", "of":"-ийн",
-  "now":"одоо", "are":"байна", "best":"хамгийн сайн", "friends":"найзууд", "they":"тэд",
-  "walk":"алхах", "to":"руу", "river":"гол", "play":"тоглох", "with":"-тай",
-  "ball":"бөмбөг", "run":"гүйх", "green":"ногоон", "grass":"өвс", "night":"шөнө",
-  "sleeps":"унтдаг", "next":"хажууд", "bed":"ор", "very":"маш", "happy":"баяртай",
-  "loves":"хайрладаг",
-
-  /* Ном 2 */
-  "bat":"Бат (нэр)", "boy":"хүү", "from":"-аас", "steppe":"тал нутаг", "has":"байна (эзэмшдэг)",
-  "brown":"хүрэн", "horse":"морь", "called":"нэртэй", "tenger":"Тэнгэр (нэр)", "rides":"унадаг",
-  "across":"дундуур, дайрч", "wide":"өргөн", "field":"тал", "wind":"салхи", "soft":"зөөлөн",
-  "sky":"тэнгэр", "blue":"цэнхэр", "evening":"орой", "storm":"шуурга", "comes":"ирдэг",
-  "rain":"бороо", "heavy":"хүчтэй, хүнд", "strong":"хүчтэй", "lost":"төөрсөн", "dark":"харанхуй",
-  "he":"тэр (эр)", "his":"түүний (эр)", "afraid":"айсан", "knows":"мэддэг", "way":"зам",
-  "walks":"алхдаг", "slowly":"аажим, удаан", "through":"дундуур", "after":"дараа", "hour":"цаг",
-  "sees":"хардаг", "light":"гэрэл", "home":"гэр, гэртээ", "father":"аав", "opens":"нээдэг",
-  "door":"хаалга", "hugs":"тэврэдэг", "thank":"талархах", "my":"миний", "friend":"найз",
-
-  /* Ном 3 */
-  "saran":"Саран (нэр)", "goes":"явдаг", "market":"зах", "grandmother":"эмээ", "big":"том",
-  "busy":"хөл хөдөлгөөнтэй", "there":"тэнд", "many":"олон", "people":"хүмүүс", "colors":"өнгө",
-  "red":"улаан", "apples":"алим", "yellow":"шар", "bananas":"гадил", "fresh":"шинэхэн",
-  "fish":"загас", "buys":"худалдаж авдаг", "vegetables":"ногоо", "cheese":"бяслаг",
-  "carries":"үүрдэг, барьдаг", "bag":"цүнх", "kind":"сайхан сэтгэлтэй", "man":"эрэгтэй хүн",
-  "sweet":"чихэрлэг", "orange":"жүрж", "noon":"үд", "sit":"сууна", "under":"доор",
-  "tree":"мод", "lunch":"үдийн хоол", "tea":"цай", "tired":"ядарсан", "holds":"барьдаг",
-  "hand":"гар", "much":"их", "eat":"идэх", "drink":"уух",
-
-  /* Ном 4 */
-  "spring":"хавар", "snow":"цас", "melts":"хайлдаг", "flowers":"цэцэг", "grow":"ургана",
-  "birds":"шувууд", "sing":"дуулна", "trees":"моддууд", "days":"өдрүүд", "warm":"дулаан",
-  "children":"хүүхдүүд", "summer":"зун", "hot":"халуун", "long":"урт", "autumn":"намар",
-  "leaves":"навчис", "turn":"болно, эргэнэ", "fall":"унана", "ground":"газар", "air":"агаар",
-  "cool":"сэрүүн", "nights":"шөнүүд", "longer":"илүү урт", "cook":"хоол хийнэ", "soup":"шөл",
-  "wear":"өмсөнө", "thick":"зузаан", "coats":"пальто, дээл", "winter":"өвөл", "white":"цагаан",
-  "covers":"бүрхдэг", "land":"нутаг", "families":"айл, гэр бүл", "stay":"үлдэнэ",
-  "tell":"ярина", "stories":"түүхүүд", "season":"улирал", "different":"өөр, ялгаатай",
-  "beautiful":"үзэсгэлэнтэй"
-};
+const DICT = {"a": "нэг", "about": "тухай, ойролцоогоор", "across": "эсрэг талд, дайруулан", "action": "үйлдэл", "actions": "үйлдлүүд", "after": "дараа", "again": "дахин", "air": "агаар", "alive": "амьд", "also": "бас", "amazed": "гайхсан", "an": "нэг", "and": "ба", "animals": "амьтад", "anu": "Ану (нэр)", "are": "байна", "arrived": "ирсэн", "arrives": "ирдэг", "asked": "асуусан", "at": "-д", "bag": "цүнх", "batteries": "зай, батарей", "be": "байх", "become": "болох", "been": "байсан", "before": "өмнө", "began": "эхэлсэн", "begin": "эхлэх", "believe": "итгэх", "belonged": "харьяалагддаг байсан", "below": "доор", "beside": "хажууд", "best": "хамгийн сайн", "big": "том", "bolor": "Болор (нэр)", "book": "ном", "books": "номууд", "boots": "гутал", "both": "хоёулаа", "bottles": "лонхнууд", "boy": "хүү", "broken": "эвдэрсэн", "brown": "хүрэн", "building": "барих, бүтээх", "burn": "шатаах", "bus": "автобус", "but": "гэхдээ", "by": "-аар", "can": "чадах, болох", "card": "карт", "carefully": "болгоомжтой", "celebrate": "тэмдэглэх", "change": "өөрчлөх", "cheap": "хямд", "childhood": "бага нас", "children": "хүүхдүүд", "choose": "сонгох", "city": "хот", "closer": "илүү ойр", "cloud": "үүл", "coal": "нүүрс", "coats": "пальто, дээл", "cold": "хүйтэн", "collected": "цуглуулсан", "comes": "ирдэг", "complained": "гомдоллосон", "cookies": "жигнэмэг", "could": "чадах байсан", "countryside": "хөдөө", "covers": "бүрхдэг", "darkhan": "Дархан (хот)", "day": "өдөр", "days": "өдрүүд", "decided": "шийдсэн", "degrees": "градус", "designed": "зохиосон", "despite": "хэдий ч", "dirty": "бохир", "disappointed": "сэтгэл дундуур", "do": "хийх", "door": "хаалга", "dorj": "Дорж (нэр)", "dramatic": "гайхалтай, огцом", "drink": "уух", "drops": "дуслууд", "drought": "ган гачиг", "dumplings": "банш, бууз", "each": "тус бүр", "easy": "хялбар", "eat": "идэх", "edge": "захын хэсэг", "effort": "хүчин чармайлт", "empty": "хоосон", "endless": "төгсгөлгүй", "even": "ч гэсэн", "evening": "орой", "every": "бүр", "everyone": "хүн бүр", "everything": "бүх зүйл", "exactly": "яг", "excited": "баярласан, догдолсон", "extremely": "туйлын", "eyes": "нүд", "failed": "бүтэлгүйтсэн", "fall": "унах", "families": "айл, гэр бүлүүд", "feel": "мэдрэх", "feeling": "мэдрэмж", "feels": "мэдэрдэг", "felt": "мэдэрсэн", "few": "цөөн", "filled": "дүүргэсэн", "finally": "эцэст нь", "find": "олох", "finish": "дуусгах", "first": "эхний", "fixed": "засаж янзалсан", "fog": "манан", "for": "-д зориулан", "forgot": "мартсан", "fourteen": "арван дөрөв", "friendly": "нөхөрсөг", "frozen": "хөлдсөн", "from": "-аас", "full": "дүүрэн", "gather": "цугларах", "ger": "гэр", "gers": "гэрүүд", "get": "авах", "give": "өгөх", "go": "явах", "goodbye": "баяртай (салах ёс)", "grandfather": "өвөө", "grass": "өвс", "gray": "саарал", "green": "ногоон", "growing": "ургаж байгаа", "habit": "зуршил", "habits": "зуршлууд", "had": "байсан", "half": "тал", "has": "байна", "hats": "малгай", "he": "тэр (эр)", "healthier": "илүү эрүүл", "heavy": "хүнд", "help": "туслах", "helps": "тусалдаг", "her": "түүний (эм)", "herds": "сүрэг", "hills": "толгод", "him": "түүнд, түүнийг", "his": "түүний (эр)", "hit": "цохисон", "home": "гэр, гэртээ", "honesty": "шударга байдал", "horses": "морьд", "hours": "цагууд", "house": "байшин", "hugged": "тэвэрсэн", "if": "хэрэв", "imagine": "төсөөл", "in": "-д, дотор", "inside": "дотор", "instead": "оронд нь", "inventor": "зохион бүтээгч", "invisible": "үл үзэгдэх", "is": "байна", "it": "энэ / тэр", "its": "түүний (юмны)", "itself": "өөрөө", "jacket": "хүрэм", "journey": "аялал", "joys": "баяр баясгалан", "just": "зүгээр л, дөнгөж", "keep": "хадгалах", "kind": "төрөл, сайхан сэтгэлтэй", "knew": "мэдэж байсан", "knocked": "тогшсон", "last": "өнгөрсөн, сүүлийн", "later": "хожим", "leaked": "гоожсон", "leaks": "гоожилт", "left": "явсан", "life": "амьдрал", "like": "шиг", "listened": "сонссон", "little": "бага зэрэг, жижиг", "live": "амьдрах", "lonely": "ганцаардсан", "long": "урт", "looked": "харсан", "loved": "хайртай, дуртай байсан", "lunar": "сарны", "machine": "машин", "made": "хийсэн", "makes": "болгодог", "man": "эрэгтэй хүн", "many": "олон", "may": "магадгүй, болно", "melts": "хайлдаг", "mess": "замбараагүй байдал", "milk": "сүү", "minus": "хасах", "minutes": "минут", "moment": "мөч", "money": "мөнгө", "months": "сарууд", "morning": "өглөө", "mr": "ноён", "name": "нэр", "nearby": "ойролцоо", "nearly": "бараг", "needed": "хэрэгтэй байсан", "nervous": "сандарсан", "never": "хэзээ ч үгүй", "new": "шинэ", "next": "дараагийн, хажууд", "not": "биш", "notice": "анзаарах", "noticed": "анзаарсан", "now": "одоо", "of": "-ийн", "often": "ихэвчлэн", "old": "настай, хуучин", "on": "дээр", "once": "нэг удаа", "one": "нэг", "only": "зөвхөн", "onto": "дээр нь", "opened": "нээсэн", "outside": "гадаа", "over": "турш, дээгүүр", "owner": "эзэн", "packed": "баглаж хийсэн", "pages": "хуудас", "parents": "эцэг эх", "part": "хэсэг", "patient": "тэвчээртэй", "people": "хүмүүс", "perfect": "төгс", "person": "хүн", "photo": "зураг", "picked": "шүүрсэн, авсан", "plant": "ургамал", "plastic": "хуванцар", "platform": "платформ, зогсоол", "pointed": "заасан", "pride": "бахархал", "probably": "магадгүй", "produced": "гаргасан", "progress": "ахиц", "proud": "бахархсан", "quit": "болих", "radios": "радио", "rare": "ховор", "read": "уншсан", "reading": "унших", "reality": "бодит байдал", "realized": "ойлгосон", "refused": "татгалзсан", "relatives": "төрөл садан", "relieved": "тайвширсан", "remember": "санах", "repeated": "давтагдсан", "results": "үр дүн", "river": "гол", "rivers": "голууд", "room": "өрөө", "said": "хэлсэн", "same": "ижил", "sar": "сар", "sat": "суусан", "saw": "харсан", "school": "сургууль", "secret": "нууц", "secretly": "нууцаар", "seem": "санагдах", "shared": "хуваалцсан", "she": "тэр (эм)", "shopkeeper": "дэлгүүрийн худалдагч", "sidewalk": "явган хүний зам", "simple": "энгийн", "skate": "тэшүүрдэх", "slowly": "аажим", "small": "жижиг", "smiled": "инээмсэглэсэн", "smoke": "утаа", "snacks": "зууш", "snow": "цас", "so": "тиймээс", "soil": "хөрс", "solution": "шийдэл", "some": "зарим, жаахан", "someone": "хэн нэгэн", "sometimes": "заримдаа", "spring": "хавар", "standing": "зогсож байгаа", "start": "эхлэх", "station": "буудал", "stay": "үлдэх", "step": "алхам", "stepped": "алхсан", "still": "гэсэн ч, нам", "stories": "түүхүүд", "strange": "хачин", "street": "гудамж", "streets": "гудамжууд", "stronger": "илүү хүчтэй", "success": "амжилт", "suddenly": "гэнэт", "summer": "зун", "taken": "авсан", "tank": "сав, танк", "tea": "цай", "tears": "нулимс", "temperatures": "температур", "temuulen": "Тэмүүлэн (нэр)", "ten": "арав", "test": "туршилт", "thank": "талархах", "that": "тэр, гэдэг", "the": "тэр / энэ", "their": "тэдний", "then": "дараа нь", "there": "тэнд", "these": "эдгээр", "they": "тэд", "thick": "зузаан", "things": "зүйлс", "think": "бодох", "thirsty": "цангасан", "thirty": "гуч", "this": "энэ", "three": "гурав", "through": "дундуур", "tightly": "чанга", "time": "цаг хугацаа", "tiny": "бяцхан", "tired": "ядарсан", "to": "руу", "today": "өнөөдөр", "told": "ярьсан", "tomorrow": "маргааш", "traditional": "уламжлалт", "train": "галт тэрэг", "traveled": "аялсан", "tried": "оролдсон", "trip": "аялал", "try": "оролдох", "tsagaan": "цагаан", "turns": "болдог", "twelve": "арван хоёр", "twenty": "хорь", "ulaanbaatar": "Улаанбаатар", "under": "доор", "unimportant": "чухал биш", "up": "дээш", "usually": "ихэвчлэн", "videos": "бичлэг", "village": "тосгон", "villagers": "тосгоныхон", "visit": "айлчлах", "wait": "хүлээх", "walked": "алхсан", "walking": "алхаж байгаа", "wallet": "хэтэвч", "want": "хүсэх", "wanted": "хүссэн", "warm": "дулаан", "was": "байсан", "watched": "харсан", "water": "ус", "wear": "өмсөх", "weeks": "долоо хоногууд", "well": "худаг", "were": "байсан", "when": "хэзээ, -хад", "whenever": "хэзээ ч", "who": "хэн", "will": "болно", "window": "цонх", "winter": "өвөл", "wires": "утас", "with": "-тай", "woman": "эмэгтэй", "worked": "ажилласан", "worthwhile": "үнэ цэнэтэй", "would": "болох байсан", "wrong": "буруу", "year": "жил", "years": "жилүүд", "you": "чи", "your": "чиний"};
 
 const HOLD_MS = 350;
 const tip = document.getElementById("tip");
 const pageEl = document.getElementById("page");
+const dotsEl = document.getElementById("dots");
 const seen = new Set();
 let book = 0, current = 0, timer = null, hideTimer = null, activeEl = null;
 
 function norm(w){ return w.toLowerCase().replace(/['’]s$/, ""); }
+
+function buildDots(){
+  dotsEl.replaceChildren();
+  BOOKS[book].pages.forEach(()=>{
+    const d = document.createElement("div"); d.className = "dot"; dotsEl.appendChild(d);
+  });
+}
 
 function render(){
   const pages = BOOKS[book].pages;
@@ -240,19 +231,17 @@ pageEl.addEventListener("pointerdown", e=>{
 });
 pageEl.addEventListener("contextmenu", e=>e.preventDefault());
 
-const dots = document.getElementById("dots");
-for(let i=0;i<3;i++){ const d=document.createElement("div"); d.className="dot"; dots.appendChild(d); }
-
 const tabs = document.getElementById("tabs");
 BOOKS.forEach((b,i)=>{
   const t = document.createElement("button");
   t.className = "tab"; t.textContent = b.mn;
-  t.onclick = ()=>{ book = i; current = 0; render(); };
+  t.onclick = ()=>{ book = i; current = 0; buildDots(); render(); };
   tabs.appendChild(t);
 });
 
 document.getElementById("prev").onclick = ()=>{ if(current>0){ current--; render(); } };
 document.getElementById("next").onclick = ()=>{ if(current<BOOKS[book].pages.length-1){ current++; render(); } };
+buildDots();
 render();
 </script>
 </body>
